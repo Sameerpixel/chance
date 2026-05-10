@@ -47,12 +47,10 @@ export default function Home() {
 
     try {
 
-      // IMPORTANT FIX:
-      // frontend ids are lowercase
-      // backend expects uppercase
-
       const response = await fetch(
-        `http://localhost:3000/team/${teamId.toUpperCase()}`
+
+        `https://YOUR-RENDER-URL.onrender.com/team/${teamId.toUpperCase()}`
+
       )
 
       const data =
