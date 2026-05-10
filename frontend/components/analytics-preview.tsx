@@ -58,9 +58,9 @@ export function AnalyticsPreview({
 
   return (
 
-    <div className="min-h-screen px-4 py-8">
+    <div className="min-h-screen px-3 py-6">
 
-      <div className="max-w-6xl mx-auto">
+      <div className="max-w-[1700px] mx-auto">
 
         {/* HEADER */}
 
@@ -73,33 +73,33 @@ export function AnalyticsPreview({
             opacity: 1,
             y: 0
           }}
-          className="flex items-center gap-4 mb-12"
+          className="flex items-center gap-3 mb-8"
         >
 
           <Button
             variant="ghost"
             size="icon"
             onClick={onBack}
-            className="text-muted-foreground hover:text-white"
+            className="text-muted-foreground hover:text-white h-8 w-8"
           >
 
-            <ArrowLeft className="w-5 h-5" />
+            <ArrowLeft className="w-4 h-4" />
 
           </Button>
 
           <div>
 
-            <h1 className="text-4xl sm:text-6xl font-black text-white">
+            <h1 className="text-3xl sm:text-5xl font-black text-white">
 
               {teamData.targetTeam}
 
             </h1>
 
-            <div className="flex items-center gap-4 mt-2">
+            <div className="flex items-center gap-3 mt-1">
 
               <span
                 className={cn(
-                  "text-5xl font-black",
+                  "text-3xl sm:text-4xl font-black",
                   getStatusColor()
                 )}
               >
@@ -108,7 +108,7 @@ export function AnalyticsPreview({
 
               </span>
 
-              <span className="text-muted-foreground uppercase tracking-widest text-sm">
+              <span className="text-muted-foreground uppercase tracking-widest text-[10px]">
 
                 Playoff Probability
 
@@ -120,9 +120,9 @@ export function AnalyticsPreview({
 
         </motion.div>
 
-        {/* MATCH IMPACTS */}
+        {/* MATCH GRID */}
 
-        <div className="space-y-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-3">
 
           {teamData.matches.map(
             (match, index) => (
@@ -131,7 +131,7 @@ export function AnalyticsPreview({
               key={match.match}
               initial={{
                 opacity: 0,
-                y: 20
+                y: 10
               }}
               animate={{
                 opacity: 1,
@@ -139,132 +139,94 @@ export function AnalyticsPreview({
               }}
               transition={{
                 delay:
-                  index * 0.08
+                  index * 0.03
               }}
-              className="glass rounded-3xl p-6 border border-white/5"
+              className="glass rounded-xl p-3 border border-white/5"
             >
 
               {/* TOP */}
 
-              <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 mb-6">
+              <div className="flex items-start justify-between gap-2 mb-3">
 
                 <div>
 
-                  <h2 className="text-2xl sm:text-3xl font-bold text-white">
+                  <h2 className="text-sm font-bold text-white">
 
                     {match.match}
 
                   </h2>
 
-                  <p className="text-muted-foreground mt-2">
+                  <p className="text-[9px] text-muted-foreground mt-1">
 
-                    Match impact on
+                    Impact on
                     {" "}
                     {teamData.targetTeam}
-                    {" "}
-                    playoff qualification
 
                   </p>
 
                 </div>
 
-                {/* IMPORTANCE */}
+                {/* IMPACT */}
 
-                <div className="flex items-center gap-3 px-5 py-3 rounded-2xl bg-orange-500/10 border border-orange-500/20">
+                <div className="flex items-center gap-1 px-2 py-1 rounded-lg bg-orange-500/10 border border-orange-500/20">
 
-                  <Zap className="w-5 h-5 text-orange-400" />
+                  <Zap className="w-3 h-3 text-orange-400" />
 
-                  <div>
+                  <span className="text-xs font-black text-white">
 
-                    <p className="text-orange-400 text-sm uppercase tracking-wider">
+                    {match.importance.toFixed(0)}
 
-                      Importance
-
-                    </p>
-
-                    <p className="text-3xl font-black text-white">
-
-                      {match.importance.toFixed(1)}
-
-                    </p>
-
-                  </div>
+                  </span>
 
                 </div>
 
               </div>
 
-              {/* SCENARIOS */}
+              {/* SCENARIO 1 */}
 
-              <div className="grid md:grid-cols-2 gap-5">
+              <div className="rounded-lg border border-green-500/20 bg-green-500/5 p-3 mb-2">
 
-                {/* SCENARIO 1 */}
+                <p className="text-green-400 text-[9px] uppercase tracking-widest mb-1">
 
-                <div className="rounded-2xl border border-green-500/20 bg-green-500/5 p-5">
+                  Scenario 1
 
-                  <p className="text-green-400 text-sm uppercase tracking-widest mb-3">
+                </p>
 
-                    Scenario 1
+                <h3 className="text-white text-[11px] font-medium leading-snug">
 
-                  </p>
+                  {match.result1}
 
-                  <h3 className="text-white text-lg font-semibold leading-relaxed">
+                </h3>
 
-                    {match.result1}
+                <p className="text-2xl font-black text-green-400 mt-3">
 
-                  </h3>
+                  {match.chance1.toFixed(2)}%
 
-                  <div className="mt-8">
+                </p>
 
-                    <p className="text-sm text-muted-foreground uppercase tracking-widest">
+              </div>
 
-                      Playoff Chance
+              {/* SCENARIO 2 */}
 
-                    </p>
+              <div className="rounded-lg border border-red-500/20 bg-red-500/5 p-3">
 
-                    <p className="text-6xl font-black text-green-400 mt-2">
+                <p className="text-red-400 text-[9px] uppercase tracking-widest mb-1">
 
-                      {match.chance1.toFixed(2)}%
+                  Scenario 2
 
-                    </p>
+                </p>
 
-                  </div>
+                <h3 className="text-white text-[11px] font-medium leading-snug">
 
-                </div>
+                  {match.result2}
 
-                {/* SCENARIO 2 */}
+                </h3>
 
-                <div className="rounded-2xl border border-red-500/20 bg-red-500/5 p-5">
+                <p className="text-2xl font-black text-red-400 mt-3">
 
-                  <p className="text-red-400 text-sm uppercase tracking-widest mb-3">
+                  {match.chance2.toFixed(2)}%
 
-                    Scenario 2
-
-                  </p>
-
-                  <h3 className="text-white text-lg font-semibold leading-relaxed">
-
-                    {match.result2}
-
-                  </h3>
-
-                  <div className="mt-8">
-
-                    <p className="text-sm text-muted-foreground uppercase tracking-widest">
-
-                      Playoff Chance
-
-                    </p>
-
-                    <p className="text-6xl font-black text-red-400 mt-2">
-
-                      {match.chance2.toFixed(2)}%
-
-                    </p>
-
-                  </div>
-
-                </div>
+                </p>
 
               </div>
 
@@ -286,13 +248,11 @@ export function AnalyticsPreview({
           transition={{
             delay: 0.5
           }}
-          className="mt-10 text-center"
+          className="mt-6 text-center"
         >
 
-          <p className="text-muted-foreground">
+          <p className="text-muted-foreground text-xs">
 
-            Calculated using
-            {" "}
             {teamData.simulations.toLocaleString()}
             {" "}
             Monte Carlo simulations
