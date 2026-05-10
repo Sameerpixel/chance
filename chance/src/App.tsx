@@ -11,21 +11,22 @@ type Match = {
 
 type ApiResponse = {
   targetTeam: string
+  simulations: number
   overallChance: number
   matches: Match[]
 }
 
 const teams = [
-  "RCB",
-  "MI",
-  "GT",
-  "CSK",
-  "LSG",
-  "KKR",
   "SRH",
-  "DC",
+  "GT",
   "PBKS",
-  "RR"
+  "RCB",
+  "RR",
+  "CSK",
+  "KKR",
+  "DC",
+  "MI",
+  "LSG"
 ]
 
 function App() {
@@ -77,17 +78,13 @@ function App() {
       }}
     >
 
-      <h1>IPL Playoff Chances</h1>
+      <h1>IPL Monte Carlo Simulator</h1>
 
       <select
         value={selectedTeam}
         onChange={(e) =>
           setSelectedTeam(e.target.value)
         }
-        style={{
-          padding: "10px",
-          marginBottom: "20px"
-        }}
       >
 
         {teams.map(team => (
@@ -106,12 +103,18 @@ function App() {
       <h2>
         {data.targetTeam}
         {" "}
-        Qualification Chance
+        Playoff Chance
       </h2>
 
       <h1>
-        {Number(data.overallChance).toFixed(2)}%
+        {data.overallChance.toFixed(2)}%
       </h1>
+
+      <p>
+        Simulations:
+        {" "}
+        {data.simulations}
+      </p>
 
       <hr />
 
@@ -132,20 +135,20 @@ function App() {
           <p>
             Importance:
             {" "}
-            {Number(match.importance).toFixed(0)}
+            {match.importance}
             /100
           </p>
 
           <p>
             {match.result1}
             {" → "}
-            {Number(match.chance1).toFixed(2)}%
+            {match.chance1}%
           </p>
 
           <p>
             {match.result2}
             {" → "}
-            {Number(match.chance2).toFixed(2)}%
+            {match.chance2}%
           </p>
 
         </div>

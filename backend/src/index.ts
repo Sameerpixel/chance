@@ -1,30 +1,38 @@
 import express from "express"
 import cors from "cors"
 
-import { calculatePlayoffChances }
-from "./playoffCalculator"
+import {
+  monteCarloPlayoffCalculator
+} from "./monteCarloCalculator"
 
 const app = express()
 
 app.use(cors())
 
 app.get("/", (req, res) => {
-  res.send("Server running")
+
+  res.send("Monte Carlo server running")
+
 })
 
 app.get("/team/:teamName", (req, res) => {
 
-  const teamName = req.params.teamName
+  const teamName =
+    req.params.teamName
 
-  const data =
-    calculatePlayoffChances(teamName)
+  const result =
+    monteCarloPlayoffCalculator(
+      teamName
+    )
 
-  res.json(data)
+  res.json(result)
 
 })
 
 app.listen(3000, () => {
+
   console.log(
     "Server started on port 3000"
   )
+
 })
