@@ -51,7 +51,7 @@ export const table = [
   }
 ]
 
-export const fixtures = [
+export const fixtures: [string, string][] = [
   ["PBKS", "DC"],
 
   ["GT", "SRH"],
