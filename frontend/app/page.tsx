@@ -48,10 +48,8 @@ export default function Home() {
     try {
 
       const response = await fetch(
-
-        `https://YOUR-RENDER-URL.onrender.com/team/${teamId.toUpperCase()}`
-
-      )
+  `https://chance-backend.onrender.com/team/${teamId.toUpperCase()}`
+)
 
       const data =
         await response.json()
