@@ -11,7 +11,9 @@ app.use(cors())
 
 app.get("/", (req, res) => {
 
-  res.send("Monte Carlo server running")
+  res.send(
+    "Monte Carlo server running"
+  )
 
 })
 
