@@ -15,7 +15,7 @@ type MatchAnalysis = {
   importance: number
 }
 
-const SIMULATIONS = 50000
+const SIMULATIONS = 5000
 
 function runSimulation(
   targetTeam: string,
